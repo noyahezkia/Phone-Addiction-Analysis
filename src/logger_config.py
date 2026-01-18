@@ -1,10 +1,15 @@
 import logging
+from pathlib import Path
 
 # Set the path for the log file
-log_file_path = "logs/analysis.log"
+log_file_path = Path("logs") / "analysis.log"
 
 # Configure logger and logs formats
 def setup_logger():
+    
+    # Create logs folder if does not exist
+    log_file_path.parent.mkdir(parents=True, exist_ok=True)
+
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s | %(levelname)s | %(message)s",
