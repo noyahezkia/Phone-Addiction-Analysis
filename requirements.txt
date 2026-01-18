@@ -1,0 +1,12 @@
+# Phone Addiction Analysis
+
+# Required dependencies for the project
+pandas
+matplotlib
+seaborn
+statsmodels
+scipy
+logging
+
+# Development dependencies
+pytest
