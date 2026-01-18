@@ -1,0 +1,6 @@
+ADDICTION_LEVEL_COL = "Addiction_Level"
+EDUCATION_TIME_COL = "Time_on_Education"
+SOCIAL_MEDIA_TIME_COL = "Time_on_Social_Media"
+GAMING_TIME_COL = "Time_on_Gaming"
+DAILY_USAGE_COL = "Daily_Usage_Hours"
+USAGE_PURPOSE_COL = "Phone_Usage_Purpose"
