@@ -3,15 +3,23 @@ import logging
 
 # Load the data from CSV file
 def load_csv(path):
-    logging.info(f"Loading dataset from {path}")
-    data = pd.read_csv(path)
-    logging.info(f"Dataset loaded: {data.shape[0]} rows, {data.shape[1]} columns")
-    return data
+    try:
+        logging.info(f"Loading dataset from {path}")
+        data = pd.read_csv(path)
+        logging.info(f"Dataset loaded: {data.shape[0]} rows, {data.shape[1]} columns")
+        return data
+    except:
+        logging.error(f"Error loading file {path}")
 
+# Clean the dataset from duplicates
+def remove_duplicates(data):
+    clean_data = data.drop_duplicates()
+    logging.info(f"Data cleaned. New size: {data.shape[0]} rows, {data.shape[1]} columns")
+    return clean_data
 
-# Clean the dataset from duplicates and empty cells
-def clean_data(data):
-    clean_data = data.drop_duplicates().dropna()
+# Clean the dataset from empty cells
+def remove_empty_cells(data):
+    clean_data = data.dropna()
     logging.info(f"Data cleaned. New size: {data.shape[0]} rows, {data.shape[1]} columns")
     return clean_data
 
