@@ -1,4 +1,5 @@
 from src.logger_config import setup_logger
+from consts.paths import DATASET_PATH
 from src.data_handler import *
 from consts.data_columns import *
 from src.correlations import *
@@ -8,10 +9,8 @@ from src.visualizations import *
 def main():
     setup_logger()
 
-    DATA_PATH = "data/teen_phone_addiction_dataset.csv"
-
     # Load the dataset from csv file and clean it 
-    data = load_csv(DATA_PATH)
+    data = load_csv(DATASET_PATH)
     data = clean_data(data)
     cols_to_clean = [ADDICTION_LEVEL_COL, DAILY_USAGE_COL, EDUCATION_TIME_COL]
     data = remove_iqr_outliers(data, cols_to_clean)
