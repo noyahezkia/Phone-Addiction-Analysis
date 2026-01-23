@@ -52,7 +52,6 @@ def main():
     # Calculate linear regression in order to predict addiction level by the independent
     # variables
     model = linear_regression(data, ADDICTION_LEVEL_COL, explanatory_vars)
-    logging.info(model.summary().as_text())
 
     # Perform one way ANOVA 
     f, p = one_way_anova(data, USAGE_PURPOSE_COL, ADDICTION_LEVEL_COL)

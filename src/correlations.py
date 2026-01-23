@@ -32,6 +32,6 @@ def linear_regression(data, dependent_col, explanatory_cols):
     model = sm.OLS(dependent_vector, explanatory_matrix).fit()
 
     logging.info("Regression model fitted")
-    logging.info(f"R² = {model.rsquared:.3f}")
+    logging.info(model.summary().as_text())
 
     return model
