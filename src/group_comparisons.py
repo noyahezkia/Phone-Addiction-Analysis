@@ -2,7 +2,7 @@ import logging
 from scipy.stats import ttest_ind, f_oneway
 
 # Perform independent t-test between two numeric samples, two data lists. 
-def ttest_two_samples(first_sample, second_sample, label_a, label_b):
+def ttest_independent_samples(first_sample, second_sample, label_a, label_b):
     t_stat, p_val = ttest_ind(first_sample, second_sample, equal_var=False)
 
     logging.info(

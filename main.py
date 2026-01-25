@@ -26,17 +26,18 @@ def main():
     correlations = get_pearson_correlations(data, ADDICTION_LEVEL_COL, explanatory_vars)
     bar_plot(correlations, "Correlation with Addiction Level", "Pearson r")
 
-    # Check whether usage content affects addiction level in high usage
-    # Calculate general daily usage hours median and get the highest users
-    median_total = data[DAILY_USAGE_COL].median()
-    top_total_users = data[data[DAILY_USAGE_COL] >= median_total][ADDICTION_LEVEL_COL]
-
     # Calculate education usage hours median and get the highest users
     median_edu = data[EDUCATION_TIME_COL].median()
     top_education_users = data[data[EDUCATION_TIME_COL] >= 
                                median_edu][ADDICTION_LEVEL_COL]
 
-    ttest_results = ttest_two_samples(
+    # Check whether usage content affects addiction level in high usage
+    # Calculate general daily usage hours median and get the highest users
+    median_total = data[DAILY_USAGE_COL].median()
+    top_total_users = data[(data[DAILY_USAGE_COL] >= median_total) & 
+                       (data[EDUCATION_TIME_COL] < median_edu)][ADDICTION_LEVEL_COL]
+
+    ttest_results = ttest_independent_samples(
         top_total_users,
         top_education_users,
         "High Total Usage",
