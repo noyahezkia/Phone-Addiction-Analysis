@@ -30,3 +30,34 @@ def box_plot(df, group_col, target_col, title):
     plt.xticks(rotation=30)
     plt.title(title)
     plt.show()
+
+# Plot correlation heatmap between all variables
+def plot_correlation_heatmap(data, columns, title="Correlation Matrix"):
+
+    # Filter only numeric columns
+    numeric_df = data[columns].select_dtypes(include=["number"])
+    
+    if numeric_df.empty:
+        logging.warning("Warning: No numeric columns found for heatmap.")
+        return
+
+    plt.figure(figsize=(12, 10))
+
+    # Correlate all numeric variables with each other
+    corr = numeric_df.corr()
+    
+    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
+    
+    plt.title(title, fontsize=16)
+    plt.tight_layout()
+    plt.show()
+
+# Plot regression plot with two regressions
+def plot_split_regression(data, x_col, y_col, hue_col, title):
+
+    # Creates scaater plot with regression
+    g = sns.lmplot(x=x_col, y=y_col, hue=hue_col, data=data, 
+                   aspect=1.5, height=6, scatter_kws={"alpha":0.5})
+    
+    plt.title(title, fontsize=14)
+    plt.show()

@@ -77,5 +77,31 @@ def main():
         "Education Time vs Addiction Level"
     )
 
+    # Plot correlation heatmap for all research variables
+    all_research_vars = [
+        ADDICTION_LEVEL_COL, DAILY_USAGE_COL, EDUCATION_TIME_COL, AGE_COL, SLEEP_HRS_COL, 
+    ]
+    
+    plot_correlation_heatmap(data, all_research_vars, "Inter-Variable Research Map")
+
+    # Identify users groups to make comparisons
+    # Add Comparison_Group column 
+    data["Comparison_Group"] = "Other"
+    data.loc[(data[DAILY_USAGE_COL] >= median_total) & 
+             (data[EDUCATION_TIME_COL] < median_edu), "Comparison_Group"] = "High General"
+    data.loc[data[EDUCATION_TIME_COL] >= median_edu, "Comparison_Group"] = "High Education"
+
+    # Create Filtered dataset 
+    comparison_df = data[data["Comparison_Group"] != "Other"].copy()
+
+    # Plot split regression graph to show diefferent connections
+    plot_split_regression(
+        comparison_df, 
+        DAILY_USAGE_COL, 
+        ADDICTION_LEVEL_COL, 
+        "Comparison_Group",
+        "How Usage Type Moderates the Addiction-Usage Link"
+    )
+
 if __name__ == "__main__":
     main()
