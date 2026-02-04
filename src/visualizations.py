@@ -41,13 +41,14 @@ def plot_correlation_heatmap(data, columns, title="Correlation Matrix"):
         logging.warning("Warning: No numeric columns found for heatmap.")
         return
 
-    plt.figure(figsize=(12, 10))
+    plt.figure(figsize=(12, 8))
 
     # Correlate all numeric variables with each other
     corr = numeric_df.corr()
     
-    sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
-    
+    heatmap = sns.heatmap(corr, annot=True, cmap="coolwarm", fmt=".2f", linewidths=0.5)
+    heatmap.set_yticklabels(heatmap.get_yticklabels(), rotation=0, ha='right')
+
     plt.title(title, fontsize=16)
     plt.tight_layout()
     plt.show()
@@ -56,8 +57,9 @@ def plot_correlation_heatmap(data, columns, title="Correlation Matrix"):
 def plot_split_regression(data, x_col, y_col, hue_col, title):
 
     # Creates scaater plot with regression
-    g = sns.lmplot(x=x_col, y=y_col, hue=hue_col, data=data, 
+    plot = sns.lmplot(x=x_col, y=y_col, hue=hue_col, data=data, 
                    aspect=1.5, height=6, scatter_kws={"alpha":0.5})
     
     plt.title(title, fontsize=14)
+    plt.tight_layout()
     plt.show()
