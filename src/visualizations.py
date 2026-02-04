@@ -1,6 +1,10 @@
 import logging
 import matplotlib.pyplot as plt
 import seaborn as sns
+from consts.paths import PLOTS_DIRECTORY
+
+def get_fig_path(file_name):
+    return f"{PLOTS_DIRECTORY}/{file_name}.png"
 
 # Plot bar chart
 def bar_plot(data_dict, title, ylabel):
@@ -12,7 +16,8 @@ def bar_plot(data_dict, title, ylabel):
     plt.title(title)
     plt.xticks(rotation=30)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(get_fig_path(title))
+    plt.close()
 
 # Visualize scatter plot
 def scatter_plot(df, x_col, y_col, title):
@@ -20,7 +25,8 @@ def scatter_plot(df, x_col, y_col, title):
 
     sns.scatterplot(data=df, x=x_col, y=y_col)
     plt.title(title)
-    plt.show()
+    plt.savefig(get_fig_path(title))
+    plt.close()
 
 # Visualize box plot
 def box_plot(df, group_col, target_col, title):
@@ -29,7 +35,8 @@ def box_plot(df, group_col, target_col, title):
     sns.boxplot(data=df, x=group_col, y=target_col)
     plt.xticks(rotation=30)
     plt.title(title)
-    plt.show()
+    plt.savefig(get_fig_path(title))
+    plt.close()
 
 # Plot correlation heatmap between all variables
 def plot_correlation_heatmap(data, columns, title="Correlation Matrix"):
@@ -51,7 +58,8 @@ def plot_correlation_heatmap(data, columns, title="Correlation Matrix"):
 
     plt.title(title, fontsize=16)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(get_fig_path(title))
+    plt.close()
 
 # Plot regression plot with two regressions
 def plot_split_regression(data, x_col, y_col, hue_col, title):
@@ -62,4 +70,5 @@ def plot_split_regression(data, x_col, y_col, hue_col, title):
     
     plt.title(title, fontsize=14)
     plt.tight_layout()
-    plt.show()
+    plt.savefig(get_fig_path(title))
+    plt.close()

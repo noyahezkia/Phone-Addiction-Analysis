@@ -1,6 +1,9 @@
 # Log files
 *.log
 
+# Plot outputs
+*.png
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

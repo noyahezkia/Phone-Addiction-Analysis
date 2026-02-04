@@ -1,10 +1,11 @@
 from src.logger_config import setup_logger
-from consts.paths import DATASET_PATH
+from consts.paths import DATASET_PATH, PLOTS_DIRECTORY
 from src.data_handler import *
 from consts.data_columns import *
 from src.correlations import *
 from src.group_comparisons import *
 from src.visualizations import *
+from pathlib import Path
 
 def main():
     setup_logger()
@@ -14,6 +15,10 @@ def main():
     data = remove_empty_cells(remove_duplicates(data))
     cols_to_clean = [ADDICTION_LEVEL_COL, DAILY_USAGE_COL, EDUCATION_TIME_COL]
     data = remove_iqr_outliers(data, cols_to_clean)
+
+    # Create plots directory if doesn't exist
+    plots_dir_path = Path(PLOTS_DIRECTORY)
+    plots_dir_path.mkdir(parents=True, exist_ok=True)
 
     explanatory_vars = [
         EDUCATION_TIME_COL,
